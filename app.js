@@ -148,8 +148,10 @@ function renderMenuItem(item) {
         <h3>${item.name}</h3>
         ${item.detail ? `<p>${item.detail}</p>` : ""}
       </div>
-      ${price}
-      ${control}
+      <div class="menu-card-actions">
+        ${price}
+        ${control}
+      </div>
     </article>
   `;
 }
