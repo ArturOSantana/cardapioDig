@@ -58,8 +58,36 @@ const menu = [
     title: "Pra beliscar",
     items: [
       { id: "batata", name: "Batata", price: 10 },
-      { id: "pastel", name: "Pastel", price: 12 },
-      { id: "churros", name: "Churros", price: 10 },
+      {
+        id: "pastel-carne",
+        name: "Pastel",
+        detail: "Carne",
+        price: 12,
+      },
+      {
+        id: "pastel-queijo",
+        name: "Pastel",
+        detail: "Queijo",
+        price: 12,
+      },
+      {
+        id: "pastel-carne-queijo",
+        name: "Pastel",
+        detail: "Carne com queijo",
+        price: 12,
+      },
+      {
+        id: "churros-doce-leite",
+        name: "Churros",
+        detail: "Doce de leite",
+        price: 10,
+      },
+      {
+        id: "churros-chocolate",
+        name: "Churros",
+        detail: "Chocolate",
+        price: 10,
+      },
       {
         id: "sorvete",
         name: "Sorvete",
@@ -116,21 +144,26 @@ function formatPrice(value) {
   }).format(value);
 }
 
-function renderMenu() {
+function renderMenu(changedId) {
   menuContainer.innerHTML = menu
     .map(
       (category) => `
         <section class="menu-category" id="${category.id}" aria-labelledby="title-${category.id}">
           <h2 class="category-title" id="title-${category.id}">${category.title}</h2>
-          ${category.items.map(renderMenuItem).join("")}
+          ${category.items.map((item) => renderMenuItem(item, changedId)).join("")}
         </section>
       `,
     )
     .join("");
 }
 
-function renderMenuItem(item) {
+function renderMenuItem(item, changedId) {
   const quantity = quantities[item.id] || 0;
+  const cardClasses = [
+    "menu-card",
+    quantity > 0 ? "is-selected" : "",
+    item.id === changedId ? "is-changing" : "",
+  ].filter(Boolean).join(" ");
   const price = item.price === null
     ? '<span class="menu-price">A consultar</span>'
     : `<span class="menu-price">${formatPrice(item.price)}${item.id.startsWith("burger-") ? `<small>${item.id === "burger-individual" ? "individual" : "cada"}</small>` : ""}</span>`;
@@ -143,7 +176,7 @@ function renderMenuItem(item) {
        </div>`;
 
   return `
-    <article class="menu-card">
+    <article class="${cardClasses}">
       <div class="menu-card-info">
         <h3>${item.name}</h3>
         ${item.detail ? `<p>${item.detail}</p>` : ""}
@@ -200,10 +233,24 @@ function renderOrder() {
   document.querySelector("#clear-order").hidden = entries.length === 0;
 }
 
-function updateOrder() {
-  renderMenu();
+function replayAnimation(element, className) {
+  element.classList.remove(className);
+  void element.offsetWidth;
+  element.classList.add(className);
+  element.addEventListener("animationend", () => {
+    element.classList.remove(className);
+  }, { once: true });
+}
+
+function updateOrder(changedId) {
+  renderMenu(changedId);
   renderOrder();
   saveOrder();
+  if (changedId) {
+    replayAnimation(orderTotal, "total-updated");
+    replayAnimation(document.querySelector("#mobile-total"), "total-updated");
+    replayAnimation(document.querySelector("#header-count"), "count-updated");
+  }
 }
 
 function changeQuantity(id, amount) {
@@ -214,7 +261,7 @@ function changeQuantity(id, amount) {
   } else {
     quantities[id] = next;
   }
-  updateOrder();
+  updateOrder(id);
 }
 
 menuContainer.addEventListener("click", (event) => {

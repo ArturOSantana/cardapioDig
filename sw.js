@@ -1,4 +1,4 @@
-const CACHE_NAME = "baile-menu-v5";
+const CACHE_NAME = "baile-menu-v7";
 const APP_SHELL = [
   "./",
   "./index.html",
