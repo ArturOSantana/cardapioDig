@@ -1,0 +1,19 @@
+{
+  "name": "BAILE — cardápio",
+  "short_name": "BAILE",
+  "description": "Monte seu pedido do BAILE e consulte o total.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#16051f",
+  "theme_color": "#16051f",
+  "icons": [
+    {
+      "src": "./logoPacom-transparent.png",
+      "sizes": "550x484",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#16051f" />
+    <meta
+      name="description"
+      content="Cardápio BAILE: escolha seus favoritos, monte seu pedido e veja o total."
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./logoPacom-transparent.png" type="image/png" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>BAILE — cardápio</title>
+  </head>
+  <body>
+    <div class="page-backdrop" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="wordmark" href="#inicio" aria-label="Logo da PACOM — início">
+        <img src="./logoPacom-transparent.png" alt="PACOM — Pastoral da Comunicação" />
+      </a>
+      <a class="topbar-link" href="#pedido">
+        Sua conta
+        <span class="topbar-count" id="header-count">0</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span> COMIDA BOA, NOITE ACESA</p>
+          <h1>O cardápio<br />do <span>BAILE.</span></h1>
+          <a class="hero-cta" href="#cardapio">
+            Ver cardápio
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M10 3v13m0 0 5-5m-5 5-5-5" />
+            </svg>
+          </a>
+        </div>
+        <div class="hero-stamp" aria-label="Feito para curtir">
+          <span>feito para</span>
+          <strong>curtir</strong>
+          <span>sem pressa</span>
+        </div>
+        <div class="hero-bottom">
+          <span>COMIDA DE FESTA</span>
+          <span>01 — MENU</span>
+        </div>
+      </section>
+
+      <section class="menu-layout" id="cardapio">
+        <div class="menu-main">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow section-kicker">ESCOLHA O SEU</p>
+              <h2>Pra comer<br class="mobile-break" /> bem.</h2>
+            </div>
+            <p class="section-note">Marque os itens. O pedido é feito no caixa.</p>
+          </div>
+          <nav class="category-nav" aria-label="Categorias do cardápio">
+            <a href="#hamburgueres">Hambúrgueres</a>
+            <a href="#porcoes">Porções</a>
+            <a href="#outros">Mais coisas</a>
+            <a href="#bebidas">Bebidas</a>
+          </nav>
+          <div id="menu-items" class="menu-items" aria-live="polite"></div>
+        </div>
+
+        <aside class="order-panel" id="pedido" aria-labelledby="order-title">
+          <div class="order-panel-top">
+            <div>
+              <p class="eyebrow">PRÉVIA PARA O CAIXA</p>
+              <h2 id="order-title">Sua conta<span>.</span></h2>
+            </div>
+            <span class="order-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 8h14l1 12H4L5 8Z" />
+                <path d="M9 9V6a3 3 0 0 1 6 0v3" />
+              </svg>
+            </span>
+          </div>
+          <div class="order-lines" id="order-lines">
+            <div class="empty-order">
+              <span class="empty-order-mark">+</span>
+              <p>Marque seus favoritos.<br />O total aparece aqui.</p>
+            </div>
+          </div>
+          <div class="order-total">
+            <span>Total estimado</span>
+            <strong id="order-total">R$ 0,00</strong>
+          </div>
+          <p class="total-hint" id="total-hint">O sorvete fica fora do total — preço a consultar.</p>
+          <button class="clear-button" id="clear-order" type="button" hidden>Limpar prévia</button>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a class="footer-mark" href="#inicio" aria-label="Voltar ao início">
+        <img src="./logoPacom-transparent.png" alt="PACOM — Pastoral da Comunicação" />
+      </a>
+      <p>Paroquia Santa Terezinha do Menino Jesus</p>
+      <a href="#inicio" class="back-top">Voltar ao topo ↑</a>
+    </footer>
+
+    <div class="mobile-order-bar" id="mobile-order-bar" aria-live="polite">
+      <div>
+        <span id="mobile-count">0 itens</span>
+        <strong id="mobile-total">R$ 0,00</strong>
+      </div>
+      <a href="#pedido">Ver conta <span aria-hidden="true">→</span></a>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
